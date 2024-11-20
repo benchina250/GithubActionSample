@@ -9,8 +9,8 @@ on:
     # - cron : '00 23 * * *'
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
 
   workflow_dispatch:
 
