@@ -43,8 +43,8 @@ def get_weather(my_city):
                     wind_td_day = tds[-6]
                     wind_td_day_night = tds[-3]
 
-                    high_temp = list(high_temp_td.stripped_strings)[0]
-                    low_temp = list(low_temp_td.stripped_strings)[0]
+                    high_temp = f"{list(high_temp_td.stripped_strings)[0]} 摄氏度"
+                    low_temp = f"{list(low_temp_td.stripped_strings)[0]} 摄氏度"
                     weather_typ_day = list(weather_type_day_td.stripped_strings)[0]
                     weather_type_night = list(weather_type_night_td.stripped_strings)[0]
 
@@ -52,10 +52,11 @@ def get_weather(my_city):
                     wind_night = list(wind_td_day_night.stripped_strings)[0] + list(wind_td_day_night.stripped_strings)[1]
 
                     # 如果没有白天的数据就使用夜间的
-                    temp = f"{low_temp}——{high_temp}摄氏度" if high_temp != "-" else f"{low_temp}摄氏度"
-                    weather_typ = weather_typ_day if weather_typ_day != "-" else weather_type_night
-                    wind = f"{wind_day}" if wind_day != "--" else f"{wind_night}"
-                    return this_city, temp, weather_typ, wind
+                    #temp = f"{low_temp}——{high_temp}摄氏度" if high_temp != "-" else f"{low_temp}摄氏度"
+                    #weather_typ = weather_typ_day if weather_typ_day != "-" else weather_type_night
+                    #wind = f"{wind_day}" if wind_day != "--" else f"{wind_night}"
+                    #return this_city, temp, weather_typ, wind
+                    return this_city, weather_typ_day,high_temp,low_temp,wind_day,weather_type_night,wind_night
 
 
 def get_access_token():
@@ -101,15 +102,24 @@ def send_weather(access_token, weather):
             "region": {
                 "value": weather[0]
             },
-            "weather": {
-                "value": weather[2]
-            },
-            "temp": {
+            "weather_day": {
                 "value": weather[1]
             },
-            "wind_dir": {
+            "high_temp": {
+                "value": weather[2]
+            },
+            "low_temp": {
                 "value": weather[3]
             },
+            "wind_day": {
+                "value": weather[4]
+            },
+             "weather_night": {
+                "value": weather[5]
+             },
+             "wind_night": {
+                "value": weather[6]
+             },
             "today_note": {
                 "value": get_daily_word()
             }
